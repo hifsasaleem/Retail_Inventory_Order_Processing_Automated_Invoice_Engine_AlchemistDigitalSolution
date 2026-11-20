@@ -1,0 +1,4 @@
+sku,name,category,cost_price,unit_price,stock_quantity,reorder_threshold,description
+KB-001,Mechanical Keyboard,Electronics,15.00,25.00,20,5,USB mechanical keyboard
+MS-001,Wireless Mouse,Electronics,8.00,15.00,30,8,Wireless optical mouse
+USB-001,USB Hub,Accessories,5.00,10.00,12,4,Four port USB hub

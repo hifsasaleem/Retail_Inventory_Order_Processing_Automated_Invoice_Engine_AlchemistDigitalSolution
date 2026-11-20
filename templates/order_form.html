@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Create Order{% endblock %}{% block content %}
+<h2>Create Customer Order</h2><p class="muted">Select a customer and one or more products.</p>
+{% if not customers or not products %}<div class="alert alert-warning">Add at least one customer and one product before creating an order.</div>{% endif %}
+<div class="panel form-panel"><form method="post" id="orderForm">
+<label class="form-label">Customer</label><select class="form-select mb-3" name="customer_id" required>{% for c in customers %}<option value="{{ c.customer_id }}">{{ c.name }}{% if c.email %} — {{ c.email }}{% endif %}</option>{% endfor %}</select>
+<div class="d-flex justify-content-between align-items-center"><h5>Order items</h5><button class="btn btn-sm btn-outline-primary" type="button" id="addRow">+ Add item</button></div>
+<div id="items">{% for p in products[:1] %}<div class="row g-2 mb-2 item-row"><div class="col-md-8"><select class="form-select" name="product_id[]">{% for x in products %}<option value="{{ x.product_id }}">{{ x.sku }} — {{ x.name }} (stock {{ x.stock_quantity }})</option>{% endfor %}</select></div><div class="col-md-3"><input class="form-control" type="number" min="1" name="quantity[]" value="1" required></div><div class="col-md-1"><button class="btn btn-outline-danger remove" type="button">×</button></div></div>{% endfor %}</div>
+<label class="form-label mt-3">Discount amount</label><input class="form-control mb-3" name="discount" type="number" min="0" step="0.01" value="0">
+<button class="btn btn-primary" {% if not customers or not products %}disabled{% endif %}>Confirm Order & Generate Invoice</button></form></div>
+{% endblock %}{% block scripts %}<script>
+const productsHtml = {{ products|map(attribute='product_id')|list|tojson }};
+document.getElementById('addRow')?.addEventListener('click',()=>{const first=document.querySelector('.item-row');if(!first)return;const clone=first.cloneNode(true);clone.querySelector('input').value=1;document.getElementById('items').appendChild(clone);});
+document.getElementById('items')?.addEventListener('click',e=>{if(e.target.classList.contains('remove')){const rows=document.querySelectorAll('.item-row');if(rows.length>1)e.target.closest('.item-row').remove();}});
+</script>{% endblock %}

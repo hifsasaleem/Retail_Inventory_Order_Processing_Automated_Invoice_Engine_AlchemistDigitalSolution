@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Dashboard{% endblock %}{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4"><div><h2>Dashboard</h2><p class="muted">Retail business overview</p></div><a class="btn btn-primary" href="{{ url_for('order_new') }}">Create Order</a></div>
+<div class="row g-3 mb-4">
+{% for label,value in [('Products',summary.products),('Units in Stock',summary.units),('Low Stock',summary.low_count or 0),('Out of Stock',summary.out_count or 0)] %}
+<div class="col-sm-6 col-xl-3"><div class="stat"><span>{{ label }}</span><strong>{{ value }}</strong></div></div>{% endfor %}
+<div class="col-sm-6 col-xl-3"><div class="stat"><span>Completed Revenue</span><strong>{{ "%.2f"|format(revenue) }}</strong></div></div>
+<div class="col-sm-6 col-xl-3"><div class="stat"><span>Inventory Cost Value</span><strong>{{ "%.2f"|format(summary.stock_cost or 0) }}</strong></div></div></div>
+<div class="row g-3"><div class="col-lg-6"><div class="panel"><h5>Low-stock products</h5><div class="table-responsive"><table class="table"><tr><th>Product</th><th>SKU</th><th>Stock</th></tr>{% for p in low %}<tr><td>{{ p.name }}</td><td>{{ p.sku }}</td><td>{{ p.stock_quantity }}</td></tr>{% else %}<tr><td colspan="3">No low-stock products.</td></tr>{% endfor %}</table></div></div></div>
+<div class="col-lg-6"><div class="panel"><h5>Recent orders</h5><div class="table-responsive"><table class="table"><tr><th>Invoice</th><th>Customer</th><th>Total</th></tr>{% for o in recent %}<tr><td>{{ o.invoice_number }}</td><td>{{ o.customer_name }}</td><td>{{ o.grand_total }}</td></tr>{% else %}<tr><td colspan="3">No orders yet.</td></tr>{% endfor %}</table></div></div></div></div>{% endblock %}

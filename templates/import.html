@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Bulk Import{% endblock %}{% block content %}
+<h2>Bulk Product Import</h2><p class="muted">Upload a CSV to add products or update existing products by SKU.</p>
+<div class="panel form-panel"><p>Required columns: <code>sku,name,category,cost_price,unit_price,stock_quantity,reorder_threshold</code>. Optional: <code>description</code>.</p>
+<a class="btn btn-outline-secondary mb-3" href="{{ url_for('static',filename='sample_products.csv') }}">Download sample CSV</a>
+<form method="post" enctype="multipart/form-data"><input class="form-control mb-3" type="file" name="file" accept=".csv" required><button class="btn btn-primary">Import CSV</button></form></div>{% endblock %}

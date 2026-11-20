@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}{{ 'Edit' if product else 'Add' }} Product{% endblock %}{% block content %}
+<h2>{{ 'Edit Product' if product else 'Add Product' }}</h2><div class="panel form-panel"><form method="post"><div class="row g-3">
+{% if not product %}<div class="col-md-6"><label class="form-label">SKU</label><input class="form-control" name="sku" required maxlength="100"></div>{% else %}<div class="col-md-6"><label class="form-label">SKU</label><input class="form-control" value="{{ product.sku }}" disabled></div>{% endif %}
+<div class="col-md-6"><label class="form-label">Product name</label><input class="form-control" name="name" required value="{{ product.name if product else '' }}"></div>
+<div class="col-md-6"><label class="form-label">Category</label><input class="form-control" name="category" required value="{{ product.category if product else '' }}"></div>
+<div class="col-md-3"><label class="form-label">Cost price</label><input class="form-control" name="cost_price" type="number" min="0" step="0.01" required value="{{ product.cost_price if product else '' }}"></div>
+<div class="col-md-3"><label class="form-label">Selling price</label><input class="form-control" name="unit_price" type="number" min="0" step="0.01" required value="{{ product.unit_price if product else '' }}"></div>
+{% if not product %}<div class="col-md-3"><label class="form-label">Initial stock</label><input class="form-control" name="stock_quantity" type="number" min="0" required value="0"></div>{% endif %}
+<div class="col-md-3"><label class="form-label">Reorder threshold</label><input class="form-control" name="reorder_threshold" type="number" min="0" required value="{{ product.reorder_threshold if product else 5 }}"></div>
+<div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="description" rows="3">{{ product.description if product and product.description else '' }}</textarea></div></div><div class="mt-4"><button class="btn btn-primary">Save Product</button> <a class="btn btn-light" href="{{ url_for('products') }}">Cancel</a></div></form></div>{% endblock %}

@@ -1,0 +1,13 @@
+:root{--navy:#17243a;--bg:#f4f6fa;--ink:#202b3c}
+body{background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:245px;flex-shrink:0;background:var(--navy);color:#fff;padding:28px 18px}
+.sidebar h3{font-weight:800;letter-spacing:.3px;margin-bottom:2px}.sidebar small{color:#aebbd0}
+.sidebar nav{display:grid;gap:7px;margin-top:32px}.sidebar nav a{color:#dce5f2;text-decoration:none;padding:12px 14px;border-radius:9px}
+.sidebar nav a:hover{background:#30425f;color:#fff}.main{min-width:0;flex:1}
+.muted{color:#778398}.stat,.panel{background:#fff;border:1px solid #e9edf3;border-radius:14px;padding:20px;box-shadow:0 3px 14px rgba(25,40,65,.035)}
+.stat{min-height:112px;display:flex;flex-direction:column;justify-content:space-between}.stat span{color:#778398;font-size:14px}.stat strong{font-size:27px}
+.table{margin-bottom:0}.table th{font-size:13px;color:#647187;white-space:nowrap}.table td{font-size:14px;vertical-align:middle}
+.form-panel{max-width:900px}.form-control,.form-select{border-color:#dce2eb;padding:10px 12px}.btn{border-radius:8px}
+.stock-input{width:76px}.actions{white-space:nowrap}
+@media(max-width:760px){.layout{display:block}.sidebar{width:100%;min-height:auto}.sidebar nav{display:flex;flex-wrap:wrap;margin-top:18px}.main{width:100%}}
